@@ -1,5 +1,6 @@
 package baidu.com.blockmonitorlib.monitor;
 
+import android.text.TextUtils;
 import android.util.Log;
 import android.util.Printer;
 
@@ -9,6 +10,9 @@ import android.util.Printer;
 
 public class LooperMonitor implements Printer {
 
+
+    public static final String LOG_START= "Dispatching to ";
+    public static final String LOG_END= "Finished to ";
 
     private LooperMonitor() {
 
@@ -28,5 +32,16 @@ public class LooperMonitor implements Printer {
     public void println(String x) {
 
         Log.e("+-->", "---println---"+ x);
+        if(TextUtils.isEmpty(x)) {
+
+            return;
+        }
+        if(x.contains(LOG_START)) {
+
+            LogMonitor.getInstance().startMonitor();
+        }else if(x.contains(LOG_END)) {
+
+            LogMonitor.getInstance().removeMonitor();
+        }
     }
 }

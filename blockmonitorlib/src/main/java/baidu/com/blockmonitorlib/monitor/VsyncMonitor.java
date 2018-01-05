@@ -76,8 +76,9 @@ public class VsyncMonitor implements Choreographer.FrameCallback {
             if (timeSpan> interval) {
 
                 final double fps= framesRendered* 1000/ (double) timeSpan;
-                if(fps< 45) {
+                if(fps< 55) {
 
+                    LogMonitor.getInstance().startMonitor();
                     frameStartTime= currentTimeMillis;
                     framesRendered= 0;
                     for (FpsListener fpsListener: listeners) {
